@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { DataService } from '@app/shares/services/data.service';
 
 @Component({
   selector: 'app-episodes',
-  templateUrl: './episodes.component.html',
+  template: `
+  <section class="container">
+    <ul class="episodes__list">
+        <li *ngFor="let epi of this.episodes$ | async">
+            {{ epi.episode }} - {{ epi.name }}
+        </li>
+    </ul>
+  </section>
+  `,
   styleUrls: ['./episodes.component.css']
 })
-export class EpisodesComponent implements OnInit {
+export class EpisodesComponent{
 
-  constructor() { }
+  episodes$ = this.dataSrv.getRickAndMortyEpisodes()
 
-  ngOnInit(): void {
-  }
+  constructor( private dataSrv: DataService ) { }
 
 }

@@ -8,9 +8,14 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderModule } from './shared/components/header/header.module';
 
+import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular'
+import { HttpLink } from 'apollo-angular/http'
+import { InMemoryCache } from '@apollo/client/core'
+
 @NgModule({
   declarations: [
     AppComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -18,9 +23,25 @@ import { HeaderModule } from './shared/components/header/header.module';
     CharactersListModule,
     GraphQLModule,
     HttpClientModule,
-    HeaderModule
+    HeaderModule,
+    ApolloModule
   ],
-  providers: [],
+  providers: [
+
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory(httpLink: HttpLink) {
+        return {
+          cache: new InMemoryCache(),
+          link: httpLink.create({
+            uri: 'https://48p1r2roz4.sse.codesandbox.io'
+          })
+        }
+      },
+      deps: [HttpLink]
+    }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
