@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-characters-card',
@@ -6,8 +6,15 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   styleUrls: ['./characters-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CharactersCardComponent {
+export class CharactersCardComponent implements OnInit{
   @Input() character: any
+
+  ngOnInit(): void {
+    
+    console.log('card',this.character);
+    
+    
+  }
 
   toggleFavorite(): void{
     const isFavorite = this.character.isFavorite;

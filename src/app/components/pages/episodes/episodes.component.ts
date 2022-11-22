@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DataService } from '@app/shares/services/data.service';
+import { DataService } from '@app/shared/services/data.service';
 
 @Component({
   selector: 'app-episodes',
